@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:browser": "node scripts/smoke.mjs",
     "format": "prettier --write src tests scripts README.md index.html package.json tsconfig.json",
-    "format:check": "prettier --check src tests scripts README.md index.html package.json tsconfig.json"
+    "format:check": "prettier --check src tests scripts README.md index.html package.json tsconfig.json",
+    "build:standalone": "npm run build && node scripts/package-game.mjs"
   },
   "dependencies": {
     "phaser": "^3.90.0"

@@ -2,6 +2,12 @@
 
 **Last light. Long road.** An original, playable desktop zombie survival shooter built with TypeScript, Phaser 3, Vite and a procedurally drawn pixel-art world. No external assets, paid services or API keys.
 
+## Easiest way: one file, no installation
+
+The standalone edition is `DEADFALL.html`. Download it and open it directly in a desktop browser (Chrome or Edge recommended). No Node.js, server or Internet connection is required. Click **BEGIN SURVIVAL** to start.
+
+Developers can generate this file with `npm run build:standalone`; the result is written to `release/DEADFALL.html` with all JavaScript and CSS embedded.
+
 ## Run on Windows, macOS or Linux
 
 Install Node.js 20.19+ (Node 22.12+ or 24 LTS recommended), then open a terminal in this repository:
