@@ -36,7 +36,7 @@ export class Sound {
       const f = c.createBiquadFilter();
       f.type = "lowpass";
       f.frequency.value = gun
-        ? [2200, 1400, 900, 2700, 3400, 1100][weapon]
+        ? [2200, 900, 2700][weapon]
         : type === "step"
           ? 180
           : 650;

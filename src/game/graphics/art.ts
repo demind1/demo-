@@ -41,9 +41,9 @@ export class Landscape {
       this.layers.push(canvas);
       if (layer === 0) {
         const sky = c.createLinearGradient(0, 0, 0, 300);
-        sky.addColorStop(0, "#526965");
-        sky.addColorStop(0.65, "#b4a282");
-        sky.addColorStop(1, "#d2b382");
+        sky.addColorStop(0, "#6e9abe");
+        sky.addColorStop(0.65, "#d8b59b");
+        sky.addColorStop(1, "#ecc69a");
         c.fillStyle = sky;
         c.fillRect(0, 0, 1920, 340);
         box(c, "#e8cda0", 720, 106, 38, 38);
@@ -58,7 +58,7 @@ export class Landscape {
       if (layer === 1) {
         for (let i = 0; i < 16; i++) {
           const x = i * 145;
-          poly(c, "#708078", [
+          poly(c, "#74849b", [
             [x - 100, 230],
             [x + 15, 130 + r() * 65],
             [x + 100, 160 + r() * 25],
@@ -68,8 +68,8 @@ export class Landscape {
         for (let i = 0; i < 190; i++) {
           const x = i * 11;
           const h = 20 + r() * 36;
-          box(c, "#586d60", x, 243 - h, 9, h);
-          poly(c, "#617466", [
+          box(c, "#526c67", x, 243 - h, 9, h);
+          poly(c, "#667969", [
             [x - 11, 236],
             [x + 4, 199 - h / 2],
             [x + 18, 236],
@@ -101,13 +101,13 @@ export class Landscape {
         }
       }
       if (layer === 2) {
-        box(c, "#5c7052", 0, 246, 1920, 95);
+        box(c, "#798444", 0, 246, 1920, 95);
         for (let i = 0; i < 2400; i++) {
           const x = r() * 1920,
             y = 250 + r() * 88;
           box(
             c,
-            ["#7b8754", "#909056", "#a1a16a", "#435e49"][i % 4],
+            ["#8da04b", "#b1ae55", "#c5b96c", "#526b35"][i % 4],
             x,
             y,
             2 + r() * 5,
@@ -117,9 +117,9 @@ export class Landscape {
         for (let i = 0; i < 25; i++) {
           const x = i * 94,
             h = 36 + r() * 55;
-          box(c, "#444f40", x, 300 - h, 5, h);
+          box(c, "#6e523b", x, 300 - h, 5, h);
           for (let j = 0; j < 6; j++)
-            poly(c, region === 3 ? "#314c40" : "#3e5947", [
+            poly(c, region === 3 ? "#32573b" : "#4c673b", [
               [x - 22 + j * 2, 270 - h + j * 7],
               [x + 2, 226 - h + j * 10],
               [x + 28 - j * 2, 270 - h + j * 7],
@@ -135,9 +135,9 @@ export class Landscape {
         }
       }
       if (layer === 3) {
-        box(c, "#b19e70", 0, 334, 1920, 10);
+        box(c, "#bfa378", 0, 334, 1920, 10);
         box(c, "#d1c08b", 0, 344, 1920, 4);
-        box(c, "#333e3c", 0, 348, 1920, 121);
+        box(c, "#484747", 0, 348, 1920, 121);
         for (let i = 0; i < 2200; i++) {
           const x = r() * 1920,
             y = 350 + r() * 116;
@@ -157,7 +157,7 @@ export class Landscape {
         box(c, "#b2b4a0", 0, 470, 1920, 3);
         box(c, "#293a32", 0, 473, 1920, 3);
         box(c, "#9a885b", 0, 476, 1920, 8);
-        box(c, "#554e37", 0, 484, 1920, 56);
+        box(c, "#69533b", 0, 484, 1920, 56);
         for (let i = 0; i < 1600; i++) {
           const x = r() * 1920,
             y = 480 + r() * 60;

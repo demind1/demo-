@@ -136,14 +136,16 @@ try {
     s.run.remaining = 0;
   });
   await page.waitForSelector(".shop");
+  assert.equal(await page.locator(".weapon-offer").count(), 3);
+  assert.equal(await page.locator(".weapon-slots span").count(), 3);
   await read(() => {
     const s = window.__deadfall.scene.getScene("Survival");
     s.run.money = 1200;
     s.ui.render();
   });
-  await page.click('[data-action="buy:3"]');
+  await page.click('[data-action="buy:2"]');
   assert.equal(
-    await read(() => window.__deadfall.scene.getScene("Survival").run.owned[3]),
+    await read(() => window.__deadfall.scene.getScene("Survival").run.owned[2]),
     true,
   );
   await page.click('[data-action="buy:damage"]');
@@ -160,13 +162,13 @@ try {
     2,
   );
   await press("1");
-  await press("4");
+  await press("3");
   assert.equal(
     await read(() => window.__deadfall.scene.getScene("Survival").run.weapon),
-    3,
+    2,
   );
   const ammo = await read(
-    () => window.__deadfall.scene.getScene("Survival").run.ammo[3],
+    () => window.__deadfall.scene.getScene("Survival").run.ammo[2],
   );
   await page.mouse.move(1100, 500);
   await page.mouse.down();
@@ -174,7 +176,7 @@ try {
   await page.mouse.up();
   assert.ok(
     (await read(
-      () => window.__deadfall.scene.getScene("Survival").run.ammo[3],
+      () => window.__deadfall.scene.getScene("Survival").run.ammo[2],
     )) <
       ammo - 1,
   );
@@ -216,7 +218,7 @@ try {
     )) < 65,
   );
   // Every weapon must fire and kill a real enemy through the same collision pipeline.
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 3; i++) {
     await read((i) => {
       const s = window.__deadfall.scene.getScene("Survival");
       s.run.owned[i] = true;
@@ -253,7 +255,7 @@ try {
     });
     // Aim at the visible animated torso, including the crawler's low silhouette.
     console.log(
-      `Checking weapon ${i + 1}/6 against ${await read(() => window.__deadfall.scene.getScene("Survival").run.enemies[0].kind)}`,
+      `Checking weapon ${i + 1}/3 against ${await read(() => window.__deadfall.scene.getScene("Survival").run.enemies[0].kind)}`,
     );
     await page.mouse.click(coords.x, coords.y);
     await page.waitForFunction(

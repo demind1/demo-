@@ -128,9 +128,9 @@ export class Run {
   score = 0;
   elapsed = 0;
   weapon = 0;
-  owned = [true, false, false, false, false, false];
+  owned = WEAPONS.map((_, i) => i === 0);
   ammo = WEAPON_AMMO();
-  reserve = [90, 36, 30, 120, 160, 25];
+  reserve = [90, 30, 120];
   damageLevel = 0;
   reloadLevel = 0;
   speedLevel = 0;
@@ -156,7 +156,7 @@ export class Run {
   }
   purchase(item: string): boolean {
     const id = Number(item);
-    if (Number.isInteger(id) && id >= 0 && id < 6) {
+    if (Number.isInteger(id) && id >= 0 && id < WEAPONS.length) {
       if (!this.owned[id] && this.money >= WEAPONS[id].price) {
         this.money -= WEAPONS[id].price;
         this.owned[id] = true;
@@ -187,9 +187,7 @@ export class Run {
       return false;
     this.money -= price;
     if (item === "ammo")
-      this.reserve = this.reserve.map(
-        (v, i) => v + [60, 24, 18, 90, 100, 15][i],
-      );
+      this.reserve = this.reserve.map((v, i) => v + [60, 18, 90][i]);
     if (item === "heal") this.player.hp = this.player.maxHp;
     if (item === "health") {
       this.player.maxHp += 25;

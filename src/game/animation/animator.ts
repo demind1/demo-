@@ -1,3 +1,4 @@
+import { WEAPONS } from "../combat/weapons";
 import type { Player, Enemy, EnemyKind } from "../entities/model";
 import { ENEMIES } from "../entities/model";
 import {
@@ -404,13 +405,17 @@ export function playerPose(p: Player, aim: number, weapon: number): Pose {
     a.recoil.value * 0.035 +
     (p.melee > 0 ? -0.65 * Math.sin(melee * Math.PI) : 0);
   const direction = vec(Math.cos(angle), Math.sin(angle));
+  const reach = weapon === 0 ? 25 : 21;
   const gun = offset(
     out.chest,
-    direction.x * (25 - a.recoil.value * 0.6) + strike,
-    direction.y * 25 - 2 + crouch * -0.3,
+    direction.x * (reach - a.recoil.value * 0.6) + strike,
+    direction.y * reach - 2 + crouch * -0.3,
   );
   const gripOffset = rotate(vec(3, 4), angle),
-    supportOffset = rotate(vec(weapon > 1 ? 16 : 3, weapon > 1 ? 4 : 8), angle);
+    supportOffset = rotate(
+      vec(WEAPONS[weapon].support, weapon > 0 ? 4 : 8),
+      angle,
+    );
   const grip = offset(gun, gripOffset.x, gripOffset.y),
     support = offset(gun, supportOffset.x, supportOffset.y);
   let hand =
@@ -431,6 +436,17 @@ export function playerPose(p: Player, aim: number, weapon: number): Pose {
       reload,
     );
     hand = path;
+  }
+  if (p.reload > 0 && weapon === 1) {
+    const shellCycle = (reload * 3) % 1;
+    hand = mix(
+      offset(out.pelvis, -8, 0),
+      offset(gun, 8, 8),
+      Math.sin(shellCycle * Math.PI),
+    );
+  }
+  if (weapon === 1 && p.reload <= 0) {
+    hand.x -= Math.sin(clamp(p.recoil / 12) * Math.PI) * 5;
   }
   out.arms[0] = solveIK(offset(out.chest, -6, 1), hand, 22, 25, 1);
   out.arms[1] = solveIK(offset(out.chest, 4, -1), grip, 21, 23, 1);
@@ -564,7 +580,7 @@ export function worldPoint(
 export function playerMuzzle(p: Player, aim: number, weapon: number): Vec {
   const pose = playerPose(p, aim, weapon),
     gun = pose.gun!;
-  const barrel = weapon > 1 ? [0, 0, 46, 48, 35, 59][weapon] : 28;
+  const barrel = WEAPONS[weapon].barrel;
   const tip = rotate(vec(barrel, -1), gun.angle);
   return worldPoint(pose, offset(gun.position, tip.x, tip.y), p.x, p.y);
 }

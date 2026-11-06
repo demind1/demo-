@@ -101,7 +101,7 @@ try {
           const dx = p.x;
           p.x = 0;
           for (const foot of p.animation.feet) foot.x -= dx;
-          survivor(c, p, -0.08, 3, 0);
+          survivor(c, p, -0.08, 2, 0);
           p.x = dx;
         }
         c.restore();

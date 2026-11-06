@@ -1,12 +1,12 @@
 :root {
   font-family: "Courier New", monospace;
   color: #e9e5d4;
-  background: #101916;
+  background: #181616;
   font-synthesis: none;
   font-weight: 400;
   --gold: #d8b77b;
-  --muted: #a4afa0;
-  --ink: #162420;
+  --muted: #aba9a9;
+  --ink: #222020;
 }
 * {
   box-sizing: border-box;
@@ -105,30 +105,30 @@ header {
     0.7cqw "Courier New",
     monospace;
   letter-spacing: 0.15em;
-  border-left: 1px solid #81908370;
+  border-left: 1px solid #8c8a8a70;
   padding-left: 1.5cqw;
   margin-left: 0.5cqw;
-  color: #c2c7b6;
+  color: #c4c2c2;
 }
 .status {
   font-size: 0.7cqw;
   letter-spacing: 0.13em;
-  color: #d0d3bd;
+  color: #d0cece;
 }
 .status i {
   display: inline-block;
-  background: #bdc58d;
+  background: #bab8b8;
   width: 0.4cqw;
   height: 0.4cqw;
   margin-right: 0.6cqw;
-  box-shadow: 0 0 10px #c6ce9250;
+  box-shadow: 0 0 10px #c2c0c050;
 }
 .menu-shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, #0c211be0, #12241c60 53%, #18251a05),
-    linear-gradient(#11251b60, transparent 75%, #0a1c18a0);
+    linear-gradient(90deg, #1d1b1be0, #201e1e60 53%, #22202005),
+    linear-gradient(#201e1e60, transparent 75%, #191717a0);
 }
 .hero {
   position: absolute;
@@ -149,10 +149,10 @@ header {
   margin: 1.3cqw 0 0.9cqw;
   font-weight: 900;
   color: #eee9d5;
-  text-shadow: 0 3px #0b211c25;
+  text-shadow: 0 3px #1d1b1b25;
 }
 .hero h1 span {
-  color: #c8cdb4;
+  color: #c9c7c7;
 }
 .hero h1 b {
   font-size: 2.1cqw;
@@ -168,7 +168,7 @@ header {
 .intro {
   font-size: 0.95cqw;
   line-height: 1.9;
-  color: #b9c4b5;
+  color: #c0bebe;
 }
 .menu-actions {
   display: flex;
@@ -177,7 +177,7 @@ header {
 }
 .primary {
   background: var(--gold);
-  color: #1d2b24;
+  color: #282626;
   font-weight: bold;
   letter-spacing: 0.09em;
   padding: 1.25cqw 1.7cqw;
@@ -193,9 +193,9 @@ header {
   font-size: 1.3cqw;
 }
 .secondary {
-  background: #192d2580;
-  color: #d5dbc6;
-  border: 1px solid #90a48c60;
+  background: #28262680;
+  color: #d7d5d5;
+  border: 1px solid #9c9a9a60;
   padding: 1.2cqw 1.5cqw;
   font-size: 0.8cqw;
   letter-spacing: 0.1em;
@@ -206,12 +206,12 @@ header {
 .record {
   font-size: 0.65cqw;
   letter-spacing: 0.1em;
-  color: #8da18d;
+  color: #9a9898;
   margin-top: 1.4cqw;
 }
 .record strong {
   font-size: 0.9cqw;
-  color: #d1d2bc;
+  color: #cfcdcd;
   margin: 0 0.5cqw 0 1cqw;
 }
 .record > span {
@@ -223,9 +223,9 @@ header {
   top: 14.4cqw;
   width: 20cqw;
   padding: 1.6cqw 1.7cqw;
-  background: #1b30236e;
+  background: #2a28286e;
   border-top: 2px solid #c7b78390;
-  border-bottom: 1px solid #bfc7a640;
+  border-bottom: 1px solid #c0bebe40;
   backdrop-filter: blur(3px);
 }
 .dispatch .eyebrow {
@@ -240,7 +240,7 @@ header {
 .signal span {
   float: right;
   font-size: 0.7cqw;
-  color: #c5cdb4;
+  color: #c8c6c6;
 }
 .dispatch h3 {
   font:
@@ -251,16 +251,16 @@ header {
 }
 .dispatch p {
   font-size: 0.8cqw;
-  color: #bdc8ac;
+  color: #c2c0c0;
   line-height: 1.9;
 }
 .dispatch-bottom {
-  border-top: 1px solid #d0d2ad30;
+  border-top: 1px solid #cccaca30;
   padding-top: 1cqw;
   margin-top: 1.5cqw;
   font-size: 0.53cqw;
   letter-spacing: 0.1em;
-  color: #a1b096;
+  color: #a9a7a7;
   display: flex;
   justify-content: space-between;
 }
@@ -280,7 +280,7 @@ header {
 }
 .location small {
   font-size: 0.55cqw;
-  color: #b9c4a9;
+  color: #bebcbc;
 }
 footer {
   position: absolute;
@@ -290,11 +290,11 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #acb59930;
+  border-top: 1px solid #afadad30;
   padding-top: 1.4cqw;
   font-size: 0.55cqw;
   letter-spacing: 0.09em;
-  color: #a9b69c;
+  color: #b0aeae;
 }
 footer b {
   margin: 0 0.5cqw;
@@ -302,7 +302,7 @@ footer b {
 }
 kbd {
   display: inline-block;
-  border: 1px solid #82927b60;
+  border: 1px solid #8b898960;
   padding: 0.15cqw 0.3cqw;
   margin-right: 0.3cqw;
   font-size: 0.6cqw;
@@ -313,7 +313,7 @@ kbd {
   left: 0;
   right: 0;
   height: 6.9cqw;
-  background: linear-gradient(#0e211cf0, #17291dd9, transparent);
+  background: linear-gradient(#1d1b1bf0, #242222d9, transparent);
   padding: 1.5cqw 3cqw;
   display: flex;
   justify-content: space-between;
@@ -333,9 +333,9 @@ kbd {
     0.6cqw "Courier New",
     monospace;
   letter-spacing: 0.15em;
-  border-left: 1px solid #99a28a70;
+  border-left: 1px solid #9d9b9b70;
   padding-left: 1.5cqw;
-  color: #bdc6ae;
+  color: #c1bfbf;
 }
 .wave-label {
   display: grid;
@@ -353,7 +353,7 @@ kbd {
 .wave-label small {
   font-size: 0.6cqw;
   letter-spacing: 0.1em;
-  color: #b5c3a7;
+  color: #bcbaba;
 }
 .resources {
   display: flex;
@@ -364,11 +364,11 @@ kbd {
 }
 .pause-button {
   font-weight: bold;
-  background: #25372b;
-  color: #d6dec4;
+  background: #323030;
+  color: #d9d7d7;
   width: 2.5cqw;
   height: 2.5cqw;
-  border: 1px solid #81927370;
+  border: 1px solid #8a888870;
 }
 .hud-bottom {
   position: absolute;
@@ -378,7 +378,7 @@ kbd {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background: linear-gradient(transparent, #10251a90);
+  background: linear-gradient(transparent, #201e1e90);
   padding: 1cqw 0;
 }
 .health-card {
@@ -387,7 +387,7 @@ kbd {
 .small-label {
   font-size: 0.65cqw;
   letter-spacing: 0.09em;
-  color: #b0bea6;
+  color: #b8b6b6;
   display: flex;
   justify-content: space-between;
   gap: 1cqw;
@@ -397,14 +397,14 @@ kbd {
 }
 .health-track {
   height: 0.55cqw;
-  background: #17251c;
-  border: 1px solid #bac39e40;
+  background: #222020;
+  border: 1px solid #bbb9b940;
   margin: 0.7cqw 0 1cqw;
 }
 .health-track i {
   display: block;
   height: 100%;
-  background: #bdc78b;
+  background: #bab8b8;
   transition: width 0.2s;
 }
 .loadout {
@@ -422,7 +422,7 @@ kbd {
 }
 .loadout > span {
   font-size: 1.1cqw;
-  color: #b7c1a7;
+  color: #bbb9b9;
 }
 .weapon-slots {
   display: flex;
@@ -432,17 +432,17 @@ kbd {
 }
 .weapon-slots span {
   font-size: 0.7cqw;
-  border: 1px solid #82917a30;
-  color: #75806b;
+  border: 1px solid #8b898930;
+  color: #7b7979;
   padding: 0.25cqw 0.5cqw;
 }
 .weapon-slots span.unlocked {
-  color: #c7cfb8;
+  color: #cac8c8;
 }
 .weapon-slots span.selected {
   background: var(--gold);
   border-color: var(--gold);
-  color: #1a3023;
+  color: #2a2828;
 }
 .run-stats {
   width: 22cqw;
@@ -458,7 +458,7 @@ kbd {
 .run-stats > span {
   font-size: 0.55cqw;
   letter-spacing: 0.16em;
-  color: #b8c2aa;
+  color: #bdbbbb;
 }
 .run-stats small {
   font-size: 0.8cqw;
@@ -472,7 +472,7 @@ kbd {
   text-align: center;
   font-size: 0.57cqw;
   letter-spacing: 0.08em;
-  color: #a7b397;
+  color: #acaaaa;
 }
 .playing {
   cursor: none;
@@ -489,12 +489,12 @@ kbd {
   font-size: 0.85cqw;
   letter-spacing: 0.22em;
   color: #ead3a0;
-  text-shadow: 0 2px 4px #10291c;
+  text-shadow: 0 2px 4px #222020;
 }
 .overlay {
   position: absolute;
   inset: 0;
-  background: #0a1b16df;
+  background: #181616df;
   backdrop-filter: blur(4px);
 }
 .modal {
@@ -515,7 +515,7 @@ kbd {
   margin: 1.4cqw 0;
 }
 .modal p {
-  color: #acbca6;
+  color: #b6b4b4;
   font-size: 0.85cqw;
   line-height: 1.7;
   margin-bottom: 2cqw;
@@ -533,7 +533,7 @@ kbd {
 }
 .text-button {
   background: none;
-  color: #9db296;
+  color: #a9a7a7;
   font-size: 0.7cqw;
   padding: 1cqw;
   letter-spacing: 0.08em;
@@ -548,7 +548,7 @@ kbd {
   font-size: 5.6cqw;
 }
 .death-overlay {
-  background: #1f2217dd;
+  background: #211f1fdd;
 }
 .results {
   display: flex;
@@ -569,7 +569,7 @@ kbd {
 .results span {
   font-size: 0.6cqw;
   letter-spacing: 0.13em;
-  color: #acbba3;
+  color: #b4b2b2;
 }
 .death-modal > .small-label {
   justify-content: center;
@@ -582,10 +582,10 @@ kbd {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #c0cba82b;
+  border-bottom: 1px solid #c3c1c12b;
   padding: 1.2cqw 0;
   font-size: 0.8cqw;
-  color: #c7cfb7;
+  color: #cac8c8;
 }
 .settings-modal input[type="range"] {
   accent-color: var(--gold);
@@ -598,8 +598,8 @@ kbd {
   height: 1.3cqw;
 }
 .settings-modal select {
-  background: #253a2d;
-  border: 1px solid #a7ba8b60;
+  background: #343232;
+  border: 1px solid #aeacac60;
   color: #dddcc1;
   padding: 0.4cqw;
   width: 12cqw;
@@ -614,7 +614,7 @@ kbd {
 .shop-shade {
   position: absolute;
   inset: 6.5cqw 0 4cqw;
-  background: #11251bed;
+  background: #201e1eed;
   backdrop-filter: blur(6px);
 }
 .shop {
@@ -647,7 +647,7 @@ kbd {
 }
 .shop-heading > div:last-child > span {
   font-size: 0.65cqw;
-  color: #bbc9ac;
+  color: #c2c0c0;
 }
 .shop-heading .primary {
   min-width: 13cqw;
@@ -661,7 +661,7 @@ kbd {
 .shop h4 {
   font-size: 0.75cqw;
   letter-spacing: 0.12em;
-  border-bottom: 1px solid #acb79640;
+  border-bottom: 1px solid #b0aeae40;
   padding-bottom: 0.8cqw;
   margin: 1cqw 0;
 }
@@ -669,7 +669,7 @@ kbd {
   float: right;
   font-weight: normal;
   font-size: 0.6cqw;
-  color: #8fa387;
+  color: #9a9898;
 }
 .weapon-grid {
   display: grid;
@@ -677,13 +677,13 @@ kbd {
   gap: 0.8cqw;
 }
 .weapon-offer {
-  border: 1px solid #9ba78738;
+  border: 1px solid #a09e9e38;
   padding: 1cqw;
-  background: #364a321f;
+  background: #4240401f;
 }
 .weapon-offer.owned {
-  border-color: #bfc79660;
-  background: #aaba7720;
+  border-color: #bdbbbb60;
+  background: #aba9a920;
 }
 .weapon-offer .small-label {
   font-size: 0.5cqw;
@@ -695,7 +695,7 @@ kbd {
 }
 .weapon-offer small {
   font-size: 0.55cqw;
-  color: #a7b397;
+  color: #acaaaa;
 }
 .buy {
   border: 1px solid #c6b77b65;
@@ -723,8 +723,8 @@ kbd {
   top: 0.6cqw;
   width: 6cqw;
   height: 0.6cqw;
-  background: #b8bea6;
-  box-shadow: 0 0.35cqw #405347;
+  background: #bab8b8;
+  box-shadow: 0 0.35cqw #4e4c4c;
 }
 .gun-icon:after {
   content: "";
@@ -734,7 +734,7 @@ kbd {
   width: 0.7cqw;
   height: 1cqw;
   transform: skew(-15deg);
-  background: #758875;
+  background: #817f7f;
 }
 .gun-icon i {
   position: absolute;
@@ -760,25 +760,25 @@ kbd {
   left: 2cqw;
   width: 2.3cqw;
   height: 0.4cqw;
-  background: #7f967d;
+  background: #8d8b8b;
 }
 .upgrades article {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.75cqw 0;
-  border-bottom: 1px solid #b5c2a121;
+  border-bottom: 1px solid #bab8b821;
 }
 .upgrades article strong {
   display: block;
   font-size: 0.7cqw;
   font-weight: normal;
-  color: #d1d5b9;
+  color: #d0cece;
 }
 .upgrades article small {
   display: block;
   font-size: 0.55cqw;
-  color: #8fa585;
+  color: #9b9999;
   margin-top: 0.3cqw;
 }
 .upgrades .buy {
@@ -794,7 +794,7 @@ kbd {
   bottom: 3cqw;
   transform: translateX(-50%);
   background: #d9bd83;
-  color: #1a2b20;
+  color: #272525;
   font-size: 0.7cqw;
   letter-spacing: 0.06em;
   padding: 0.8cqw 1.6cqw;
@@ -806,4 +806,36 @@ kbd {
     width: 100vw;
     height: 56.25vw;
   }
+}
+
+.weapon-preview {
+  width: 100%;
+  height: 5cqw;
+  object-fit: contain;
+  image-rendering: pixelated;
+  margin: 0.6cqw 0;
+}
+.weapon-grid {
+  grid-template-columns: 1fr;
+}
+.weapon-offer {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  align-items: center;
+  column-gap: 1cqw;
+}
+.weapon-offer .small-label {
+  grid-column: 1;
+}
+.weapon-preview {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+.weapon-offer .buy {
+  grid-column: 3;
+  grid-row: 1 / span 3;
+}
+.weapon-offer h3,
+.weapon-offer small {
+  grid-column: 1;
 }

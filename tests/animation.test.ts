@@ -114,10 +114,10 @@ describe("skeletal animation", () => {
     const p = new Run().player;
     p.reload = 1.1;
     updatePlayerAnimation(p, 1 / 60, 0, 1.25);
-    const first = playerPose(p, 0, 3);
+    const first = playerPose(p, 0, 2);
     p.reload = 0.6;
     updatePlayerAnimation(p, 1 / 60, 0, 1.25);
-    const middle = playerPose(p, 0, 3);
+    const middle = playerPose(p, 0, 2);
     expect(distance(first.arms[0].end, middle.arms[0].end)).toBeGreaterThan(15);
     expect(middle.gun!.magazine).toBe(1);
   });
@@ -127,9 +127,9 @@ describe("skeletal animation", () => {
       for (const aim of [-1.5, 0, 1.5, Math.PI]) {
         p.facing = facing;
         updatePlayerAnimation(p, 1 / 60, aim, 1.25);
-        const pose = playerPose(p, aim, 3);
+        const pose = playerPose(p, aim, 2);
         expect(distance(pose.arms[1].end, pose.gun!.position)).toBeLessThan(7);
-        const muzzle = playerMuzzle(p, aim, 3);
+        const muzzle = playerMuzzle(p, aim, 2);
         expect(Number.isFinite(muzzle.x) && Number.isFinite(muzzle.y)).toBe(
           true,
         );

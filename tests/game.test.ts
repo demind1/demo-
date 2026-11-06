@@ -35,8 +35,8 @@ describe("ballistics", () => {
     expect(damageForHit(30, true)).toBe(72);
     expect(damageForHit(30, true, 2)).toBe(101);
   });
-  it("defines six distinct finite, usable weapon configurations", () => {
-    expect(new Set(WEAPONS.map((w) => w.name)).size).toBe(6);
+  it("defines three distinct finite, usable weapon configurations", () => {
+    expect(new Set(WEAPONS.map((w) => w.name)).size).toBe(3);
     for (const w of WEAPONS) {
       expect(w.magazine).toBeGreaterThan(0);
       expect(w.reload).toBeGreaterThan(w.rate);
@@ -86,14 +86,14 @@ describe("survival economy", () => {
   });
   it("rejects unaffordable and duplicate purchases without spending", () => {
     const r = new Run();
-    expect(r.purchase("5")).toBe(false);
+    expect(r.purchase("2")).toBe(false);
     expect(r.money).toBe(120);
     r.money = 1000;
-    expect(r.purchase("5")).toBe(true);
-    expect(r.weapon).toBe(5);
-    expect(r.money).toBe(300);
-    expect(r.purchase("5")).toBe(false);
-    expect(r.money).toBe(300);
+    expect(r.purchase("2")).toBe(true);
+    expect(r.weapon).toBe(2);
+    expect(r.money).toBe(480);
+    expect(r.purchase("2")).toBe(false);
+    expect(r.money).toBe(480);
   });
   it("applies health, ammo and upgrades and caps progression", () => {
     const r = new Run();

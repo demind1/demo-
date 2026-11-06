@@ -54,18 +54,9 @@ export class Survival extends Phaser.Scene {
     this.ctx.imageSmoothingEnabled = false;
     this.add.image(0, 0, "frame").setOrigin(0);
     this.keys = this.input.keyboard!.addKeys(
-      "A,D,SHIFT,R,SPACE,F,E,ESC,ONE,TWO,THREE,FOUR,FIVE,SIX",
+      "A,D,SHIFT,R,SPACE,F,E,ESC,ONE,TWO,THREE",
     ) as Record<string, Phaser.Input.Keyboard.Key>;
-    this.input.keyboard!.addCapture([
-      "SPACE",
-      "ESC",
-      "ONE",
-      "TWO",
-      "THREE",
-      "FOUR",
-      "FIVE",
-      "SIX",
-    ]);
+    this.input.keyboard!.addCapture(["SPACE", "ESC", "ONE", "TWO", "THREE"]);
     this.input.on("pointerdown", (p: Phaser.Input.Pointer) => {
       if (p.leftButtonDown()) {
         this.held = true;
@@ -389,7 +380,7 @@ export class Survival extends Phaser.Scene {
           this.soundFX.play("wave");
         } else this.heal();
       }
-      ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"].forEach((k, i) => {
+      ["ONE", "TWO", "THREE"].forEach((k, i) => {
         if (Phaser.Input.Keyboard.JustDown(this.keys[k])) this.switchWeapon(i);
       });
       if (p.reload > 0) {
@@ -536,12 +527,12 @@ export class Survival extends Phaser.Scene {
     }
     const enemies = demo ? this.demo : r.enemies;
     for (const e of enemies) {
-      c.fillStyle = "#142a2450";
+      c.fillStyle = "#16151650";
       c.beginPath();
       c.ellipse(e.x, e.y + 4, 23 * ENEMIES[e.kind].scale, 4, 0, 0, Math.PI * 2);
       c.fill();
     }
-    c.fillStyle = "#12292265";
+    c.fillStyle = "#14131465";
     c.beginPath();
     c.ellipse(p.x, p.y + 5, 27, 5, 0, 0, Math.PI * 2);
     c.fill();
@@ -592,7 +583,7 @@ export class Survival extends Phaser.Scene {
     c.restore();
     const night = this.settings.night || (r.wave > 0 && r.wave % 6 >= 4);
     if (night) {
-      c.fillStyle = "#132f4d65";
+      c.fillStyle = "#101a3545";
       c.fillRect(0, 0, W, H);
       if (!demo) {
         const g = c.createRadialGradient(
@@ -610,8 +601,8 @@ export class Survival extends Phaser.Scene {
       }
     }
     const vignette = c.createRadialGradient(480, 280, 150, 480, 280, 570);
-    vignette.addColorStop(0, "#07151100");
-    vignette.addColorStop(1, "#07151165");
+    vignette.addColorStop(0, "#00000000");
+    vignette.addColorStop(1, "#00000020");
     c.fillStyle = vignette;
     c.fillRect(0, 0, W, H);
     if (p.hurt > 0 && r.phase === "playing") {

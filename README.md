@@ -4,9 +4,15 @@
 
 ## Скачать и играть / Download and play
 
-**[Скачать готовую игру DEADFALL 2.0.zip](https://github.com/demind1/demo-/raw/refs/heads/main/downloads/DEADFALL-2.0.zip)**
+**[Скачать готовую игру DEADFALL 2.1.zip](https://github.com/demind1/demo-/raw/refs/heads/main/downloads/DEADFALL-2.1.zip)**
 
 Распакуйте ZIP, откройте **DEADFALL.html** в Chrome или Edge и нажмите **BEGIN SURVIVAL**. Установка программ и интернет не нужны.
+
+## 2.1 — Clear light and three weapons
+
+Removed the green screen tint and replaced green-tinted interface overlays with neutral charcoal. The sky, mountains, asphalt and earth now have distinct natural colors with stronger saturation. Vegetation keeps its natural green.
+
+The loadout is now exactly three weapons: **1 — M9 pistol, 2 — pump shotgun, 3 — AK-47**. Original procedural models use recognizable real-world proportions: an exposed pistol barrel/slide, a pump forend and tube magazine, and an AK receiver, wooden furniture and curved magazine. The shop uses the in-game models. Hand placement, muzzle positions, shell-loading gestures and sounds match the three slots.
 
 ## 2.0 — Character animation update
 
@@ -46,12 +52,12 @@ For reproducible installs use `npm ci`. For a production build run `npm run buil
 | ------------------ | ---------------------------------------------------------- |
 | A / D              | Move                                                       |
 | Shift              | Sprint                                                     |
-| Mouse / left click | Aim / fire (hold for rifle and SMG)                        |
+| Mouse / left click | Aim / fire (hold for AK-47)                                |
 | R                  | Reload from finite reserves                                |
 | Space              | Dodge, with a 2-second cooldown and brief invulnerability  |
 | F                  | Melee, with a cooldown                                     |
 | E                  | Use a field dressing (+55 HP); start next wave in the shop |
-| 1–6                | Switch to an owned weapon                                  |
+| 1–3                | Switch to an owned weapon                                  |
 | Escape             | Pause / resume; back from settings                         |
 
 ## Survive the road
@@ -66,7 +72,7 @@ Settings control sound volume, blood, shake and night lighting. Settings and bes
 
 - Complete title → combat → wave-clear shop → next wave → game-over → restart loop.
 - Articulated pixel characters with procedural walk, sprint, aim, recoil, reload, melee, dodge, hit and collapse poses. Enemy spawn, approach, attack, stagger, recover and death states.
-- Six distinct weapons: pistol, revolver, shotgun, assault rifle, SMG and sniper. Per-weapon damage, cadence, spread, reload, magazine, recoil, sound and range; shotgun multi-pellet shots.
+- Three distinct weapons: M9-style pistol, pump-action shotgun and AK-47. Per-weapon damage, cadence, spread, reload, magazine, recoil, sound and range; shotgun multi-pellet shots.
 - Ray/circle hit detection, headshots, hit marker, tracers, muzzle flash, ejected casings, directional knockback, blood and persistent capped corpses.
 - Health, healing, finite ammunition, dodge invulnerability, wave scaling, money, purchases and capped upgrades.
 - Layered cached landscapes, smooth horizontal camera follow, parallax, weather motes, dusk/night color treatment, restrained lighting and configurable shake.
@@ -79,7 +85,7 @@ This is a playable first release, with the Stage A foundation and substantial B�
 
 - Deaths use articulated procedural collapse with directional momentum and ground contact, not joint-constrained physics ragdolls. Arms and legs now use two-bone IK; this is not a full-body physics simulation.
 - Regional identity is background art and palette variation. There are no collidable barricades, destructible scenery, obstacle-navigation AI, building interiors, bosses or campaign.
-- Art and sound are original procedural work; they have not received a dedicated artist/audio production pass. Weapon shop thumbnails are simplified silhouettes.
+- Art and sound are original procedural work; they have not received a dedicated artist/audio production pass. The shop renders the same detailed weapon models used during gameplay.
 - No run saves, remappable controls, gamepad/mobile support or localization yet.
 - A browser smoke test verifies functionality, not 60 FPS across hardware or long-run balance. Windows instructions are cross-platform commands; actual validation was in Linux Chromium. Audio was executed in the browser but not audited by listening.
 
@@ -106,7 +112,7 @@ To use an existing Chromium executable, set `CHROMIUM_PATH`. On Linux, for examp
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 ```
 
-The smoke test uses the real browser and keyboard/pointer input. A development-only scene hook supplies deterministic enemy fixtures and cash; production builds do not expose it. It checks menus, settings, movement, dodge, headshots, reload, pause timing, shop and upgrades, wave transitions, weapon switching, automatic fire, enemy damage, healing, melee, all six weapons, regional rendering, death and restart. Screenshots go to the system temporary directory under `deadfall-smoke` (override with `ARTIFACT_DIR`). `GAME_URL` overrides the default dev-server URL.
+The smoke test uses the real browser and keyboard/pointer input. A development-only scene hook supplies deterministic enemy fixtures and cash; production builds do not expose it. It checks menus, settings, movement, dodge, headshots, reload, pause timing, shop and upgrades, wave transitions, weapon switching, automatic fire, enemy damage, healing, melee, all three weapons, regional rendering, death and restart. Screenshots go to the system temporary directory under `deadfall-smoke` (override with `ARTIFACT_DIR`). `GAME_URL` overrides the default dev-server URL.
 
 ## Source map
 

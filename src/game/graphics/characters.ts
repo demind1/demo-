@@ -308,7 +308,7 @@ function head(c: C, p: Pose, skin: string, kind: "player" | Enemy["kind"]) {
       [-4, 10],
     ]);
     rect(c, "#bb9671", 3, 7, 5, 1);
-    shape(c, "#263e33", [
+    shape(c, "#303338", [
       [-13, -10],
       [-11, -19],
       [-5, -22],
@@ -316,7 +316,7 @@ function head(c: C, p: Pose, skin: string, kind: "player" | Enemy["kind"]) {
       [12, -17],
       [12, -10],
     ]);
-    rect(c, "#667d61", -9, -18, 17, 3);
+    rect(c, "#656a71", -9, -18, 17, 3);
     rect(c, "#1c322c", -13, -11, 31, 5);
     rect(c, "#a3ad81", -3, -12, 6, 2);
   } else {
@@ -371,56 +371,217 @@ export function weaponArt(
   c.translate(x, y);
   c.rotate(angle);
   c.translate(-recoil, 0);
-  const long = id > 1,
-    l = long ? [0, 0, 37, 39, 26, 50][id] : 19;
-  shape(c, "#111f1c", [
-    [-6, -6],
-    [l + 8, -6],
-    [l + 10, -3],
-    [l + 10, 3],
-    [8, 4],
-    [7, 12],
-    [1, 12],
-    [-1, 2],
-    [-6, 2],
-  ]);
-  rect(c, WEAPONS[id].color, -4 - slide * 3, -5, l - 4, 3);
-  rect(c, "#687c70", 0, -2, l, 3);
-  rect(c, "#1c2a25", l + 5, -4, 4, 5);
-  rect(c, "#445548", 2, 1, 5, 10);
-  rect(c, "#9a9d82", 4, 3, 1, 5);
-  if (long) {
-    shape(c, "#806c4e", [
-      [-18, -4],
-      [-5, -4],
-      [-5, 3],
-      [-16, 8],
-      [-19, 7],
+  const steel = "#292c31",
+    edge = "#858c95",
+    dark = "#121317",
+    wood = "#965127",
+    grain = "#cc8644";
+  if (id === 0) {
+    // M9-inspired open slide, exposed barrel, trigger guard and swept grip.
+    shape(c, dark, [
+      [-7, -6],
+      [21, -6],
+      [24, -4],
+      [28, -4],
+      [28, 1],
+      [18, 2],
+      [10, 5],
+      [7, 15],
+      [-1, 14],
+      [1, 3],
+      [-7, 2],
     ]);
-    rect(c, "#443e30", -18, -2, 3, 9);
+    shape(c, "#4a4d53", [
+      [-6, -5],
+      [21, -5],
+      [21, 0],
+      [-4, 1],
+    ]);
+    rect(c, "#adb2ba", -6 - slide * 3, -5, 26, 2);
+    rect(c, "#5e6570", 4 - slide * 3, -4, 17, 3);
+    rect(c, "#d1d3d6", 10, -4, 17, 1);
+    rect(c, "#15171c", 26, -4, 2, 4);
+    rect(c, "#17191d", -5, -7, 3, 2);
+    rect(c, "#202329", 20, -7, 2, 2);
+    for (let i = 0; i < 4; i++)
+      rect(c, "#252830", -5 + i * 2 - slide * 3, -3, 1, 4);
+    shape(c, "#333236", [
+      [2, 2],
+      [9, 3],
+      [6, 14],
+      [-1, 13],
+    ]);
+    rect(c, "#88715a", 2, 6, 3, 6);
+    c.strokeStyle = steel;
+    c.lineWidth = 2;
+    c.strokeRect(9, 2, 8, 6);
+    rect(c, "#787d82", 11, 2, 1, 4);
+    if (magazine) rect(c, "#101115", -1, 13, 8, 2);
+  } else if (id === 1) {
+    // Classic pump silhouette: long barrel over magazine tube, walnut stock/forend.
+    shape(c, dark, [
+      [-26, -3],
+      [-10, -4],
+      [-3, -7],
+      [22, -7],
+      [24, -5],
+      [57, -5],
+      [57, -1],
+      [35, 0],
+      [34, 5],
+      [11, 6],
+      [8, 10],
+      [1, 10],
+      [-5, 3],
+      [-22, 10],
+      [-27, 9],
+    ]);
+    shape(c, wood, [
+      [-25, -2],
+      [-11, -3],
+      [-3, 1],
+      [-7, 4],
+      [-23, 9],
+      [-26, 8],
+    ]);
+    shape(c, grain, [
+      [-24, -2],
+      [-12, -2],
+      [-5, 1],
+      [-9, 2],
+      [-24, 5],
+    ]);
+    rect(c, "#272226", -27, -2, 3, 12);
+    rect(c, steel, -4, -6, 27, 9);
+    rect(c, edge, -3, -6, 25, 2);
+    rect(c, "#111318", 7, -3, 11, 4);
+    rect(c, "#6c747e", 9, -3, 8, 1);
+    rect(c, "#43474f", 23, -5, 34, 3);
+    rect(c, "#a0a5ab", 24, -5, 31, 1);
+    rect(c, "#17191c", 23, 1, 23, 3);
+    const pump = -Math.sin(slide * Math.PI) * 6;
+    shape(c, wood, [
+      [18 + pump, 0],
+      [34 + pump, 0],
+      [35 + pump, 5],
+      [18 + pump, 5],
+    ]);
+    rect(c, grain, 19 + pump, 0, 15, 1);
+    for (let i = 0; i < 5; i++) rect(c, "#61371f", 20 + i * 3 + pump, 2, 1, 3);
+    rect(c, "#d3b67a", 54, -7, 2, 2);
+    c.strokeStyle = steel;
+    c.lineWidth = 2;
+    c.strokeRect(2, 5, 9, 5);
+  } else {
+    // AK-47 silhouette: wooden fixed stock, receiver, gas tube and curved magazine.
+    shape(c, dark, [
+      [-27, -4],
+      [-10, -5],
+      [-4, -8],
+      [22, -8],
+      [25, -6],
+      [41, -6],
+      [44, -3],
+      [52, -3],
+      [52, 1],
+      [32, 2],
+      [28, 6],
+      [16, 6],
+      [15, 12],
+      [7, 13],
+      [3, 7],
+      [-4, 3],
+      [-25, 10],
+      [-28, 9],
+    ]);
+    shape(c, wood, [
+      [-26, -3],
+      [-11, -4],
+      [-3, 1],
+      [-9, 4],
+      [-25, 9],
+    ]);
+    shape(c, grain, [
+      [-25, -2],
+      [-12, -3],
+      [-6, 0],
+      [-24, 5],
+    ]);
+    rect(c, "#342922", -28, -3, 3, 13);
+    rect(c, steel, -5, -7, 29, 10);
+    rect(c, "#777d86", -3, -7, 23, 2);
+    rect(c, "#101217", 3, -3, 12, 3);
+    rect(c, "#8b929c", 8 - slide * 3, -3, 8, 1);
+    rect(c, "#545b65", 21, -7, 18, 3);
+    rect(c, "#a1a6ae", 25, -7, 12, 1);
+    shape(c, wood, [
+      [22, -3],
+      [36, -3],
+      [37, 3],
+      [22, 4],
+    ]);
+    rect(c, grain, 23, -3, 12, 2);
+    rect(c, "#64361e", 25, 2, 10, 2);
+    rect(c, steel, 37, -2, 15, 3);
+    rect(c, "#a6abb2", 38, -2, 13, 1);
+    rect(c, "#282d33", 43, -9, 3, 9);
+    rect(c, "#9299a0", 44, -9, 1, 2);
+    rect(c, steel, 49, -3, 4, 5);
+    shape(c, "#804322", [
+      [2, 3],
+      [8, 4],
+      [6, 15],
+      [1, 14],
+      [-1, 8],
+    ]);
+    rect(c, "#b6743b", 3, 6, 2, 7);
     if (magazine) {
-      shape(c, "#263d32", [
-        [14, 2],
-        [22, 2],
-        [20, 14],
-        [14, 12],
+      shape(c, "#15171b", [
+        [12, 3],
+        [21, 3],
+        [22, 10],
+        [27, 18],
+        [21, 23],
+        [16, 18],
+        [13, 10],
       ]);
-      rect(c, "#62755d", 16, 4, 3, 6);
+      shape(c, "#51555a", [
+        [14, 4],
+        [19, 4],
+        [20, 11],
+        [24, 18],
+        [21, 20],
+        [18, 15],
+        [15, 9],
+      ]);
+      c.strokeStyle = "#858a90";
+      c.lineWidth = 1;
+      c.beginPath();
+      c.moveTo(16, 6);
+      c.lineTo(18, 13);
+      c.lineTo(22, 18);
+      c.stroke();
     }
-    rect(c, "#899b82", 10, -7, 4, 2);
-    rect(c, "#172b25", 25, -3, 2, 4);
+    c.strokeStyle = steel;
+    c.lineWidth = 2;
+    c.strokeRect(7, 4, 7, 6);
+    rect(c, "#92979e", -1, -8, 3, 2);
   }
-  if (id === 5) {
-    rect(c, "#142822", 8, -12, 21, 5);
-    rect(c, "#9cad91", 10, -12, 15, 1);
-    rect(c, "#637a6a", 26, -11, 3, 3);
-  }
-  if (id === 1) {
-    rect(c, "#7d897b", 4, -4, 8, 8);
-    rect(c, "#c3be98", 6, -3, 2, 5);
-  }
-  if (id === 2) rect(c, "#9e8056", 17, -1, 14, 4);
   c.restore();
+}
+const thumbnailCache = new Map<number, string>();
+export function weaponThumbnail(id: number): string {
+  if (thumbnailCache.has(id)) return thumbnailCache.get(id)!;
+  const canvas = document.createElement("canvas");
+  canvas.width = 288;
+  canvas.height = 108;
+  const c = canvas.getContext("2d")!;
+  c.imageSmoothingEnabled = false;
+  c.scale(3, 3);
+  weaponArt(c, id, id === 0 ? 33 : 32, 13, 0);
+  const url = canvas.toDataURL();
+  thumbnailCache.set(id, url);
+  return url;
 }
 function transform(c: C, x: number, y: number, p: Pose, scale = 1) {
   c.save();
@@ -445,7 +606,7 @@ export function survivor(
   c.save();
   c.translate(t.x - 18, t.y + 4);
   c.rotate(-pose.cloth * 0.025);
-  shape(c, "#203b30", [
+  shape(c, "#383b3e", [
     [-8, -7],
     [2, -8],
     [7, -2],
@@ -453,15 +614,15 @@ export function survivor(
     [-5, 30],
     [-10, 21],
   ]);
-  rect(c, "#50684f", -7, -4, 9, 27);
+  rect(c, "#6e6b5e", -7, -4, 9, 27);
   rect(c, "#83936f", -5, -3, 5, 2);
   rect(c, "#2d4938", -7, 11, 8, 12);
   rect(c, "#9a9870", -4, 12, 3, 2);
   c.restore();
-  arm(c, pose.arms[0], "#526e5c", "#b69a73", false);
-  torso(c, pose, "#526b58", false);
+  arm(c, pose.arms[0], "#516475", "#b69a73", false);
+  torso(c, pose, "#536475", false);
   head(c, pose, "#c7a179", "player");
-  arm(c, pose.arms[1], "#637c66", "#c5a77e", true);
+  arm(c, pose.arms[1], "#65788c", "#c5a77e", true);
   weaponArt(
     c,
     weapon,
@@ -479,9 +640,14 @@ export function survivor(
     c.save();
     c.translate(gun.magazineHand.x, gun.magazineHand.y);
     c.rotate(-0.25);
-    rect(c, "#172e25", -2, -2, 6, 12);
-    rect(c, "#72836a", -1, -1, 2, 9);
-    rect(c, "#c1ac70", -1, -3, 4, 2);
+    if (weapon === 1) {
+      rect(c, "#a83125", -2, -2, 4, 7);
+      rect(c, "#e1b04f", -2, -3, 4, 2);
+    } else {
+      rect(c, "#25272c", -2, -2, 6, 12);
+      rect(c, "#7c828c", -1, -1, 2, 9);
+      rect(c, "#c1ac70", -1, -3, 4, 2);
+    }
     c.restore();
   }
   c.restore();
