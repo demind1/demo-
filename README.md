@@ -2,6 +2,12 @@
 
 **Last light. Long road.** An original, playable desktop zombie survival shooter built with TypeScript, Phaser 3, Vite and a procedurally drawn pixel-art world. No external assets, paid services or API keys.
 
+## Скачать и играть / Download and play
+
+**[Скачать готовую игру DEADFALL.zip](https://github.com/demind1/demo-/raw/refs/heads/main/downloads/DEADFALL.zip)**
+
+Распакуйте ZIP, откройте **DEADFALL.html** в Chrome или Edge и нажмите **BEGIN SURVIVAL**. Установка программ и интернет не нужны.
+
 ## Easiest way: one file, no installation
 
 The standalone edition is `DEADFALL.html`. Download it and open it directly in a desktop browser (Chrome or Edge recommended). No Node.js, server or Internet connection is required. Click **BEGIN SURVIVAL** to start.
