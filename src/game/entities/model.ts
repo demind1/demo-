@@ -1,3 +1,4 @@
+import type { Animation } from "../animation/animator";
 import { WEAPONS } from "../combat/weapons";
 export type EnemyKind = "walker" | "runner" | "heavy" | "crawler" | "berserker";
 export type EnemyState =
@@ -66,6 +67,7 @@ export const ENEMIES: Record<
   },
 };
 export interface Enemy {
+  animation?: Animation;
   id: number;
   x: number;
   y: number;
@@ -80,6 +82,7 @@ export interface Enemy {
   headshot: boolean;
 }
 export interface Player {
+  animation?: Animation;
   x: number;
   y: number;
   hp: number;

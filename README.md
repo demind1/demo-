@@ -4,9 +4,22 @@
 
 ## Скачать и играть / Download and play
 
-**[Скачать готовую игру DEADFALL.zip](https://github.com/demind1/demo-/raw/refs/heads/main/downloads/DEADFALL.zip)**
+**[Скачать готовую игру DEADFALL 2.0.zip](https://github.com/demind1/demo-/raw/refs/heads/main/downloads/DEADFALL-2.0.zip)**
 
 Распакуйте ZIP, откройте **DEADFALL.html** в Chrome или Edge и нажмите **BEGIN SURVIVAL**. Установка программ и интернет не нужны.
+
+## 2.0 — Character animation update
+
+This update focuses on the player and zombies. The economy, weapon statistics, levels and controls are unchanged.
+
+- Two-bone IK for knees and elbows, with world-space foot planting and distance-driven walk/run cycles. Feet retain their stance when stopping; the pelvis adjusts to keep planted legs within reach.
+- Frame-rate-independent damped recoil, torso inertia, breathing, head counter-motion and backpack/shirt follow-through.
+- Both hands follow weapon grips. Reloading has staged magazine removal, belt reach, insertion and receiver manipulation; dodge compresses the whole skeleton, and melee has wind-up and follow-through. Firing interrupts the visual melee recovery without adding an input delay.
+- Individual Walker limp, Runner arm drive, Heavy weight shifts, low Crawler hand-drag and Berserker forward hunch/burst posture. Enemies face the player and blend into attacks, stagger and recovery.
+- Articulated knee collapse, directional fall, headshot reaction, ground contact and a stable corpse pose. Crawlers have a separate horizontal collapse. These remain authored procedural deaths, not a physical ragdoll simulation.
+- Animated head/body positions supply hit regions. The established chamber ray preserves shot accuracy while muzzle flash/tracers follow the visible barrel. Pausing freezes the skeleton.
+
+For a visual contact-sheet review, run `npm run review:animation` with Vite and a Playwright browser available (set `CHROMIUM_PATH` to use system Chromium). It writes player and enemy PNG sequences under the temporary directory `deadfall-animation`. Run `npm run test:standalone` to execute the packaged production HTML in an offline browser context. This cloud browser's managed policy blocks direct `file://` navigation, so that test embeds the exact HTML content instead; it is not a claim that the local-file launch was executed in this environment.
 
 ## Easiest way: one file, no installation
 
@@ -64,7 +77,7 @@ Settings control sound volume, blood, shake and night lighting. Settings and bes
 
 This is a playable first release, with the Stage A foundation and substantial B–D systems. It is **not a claim that all commercial-quality targets in the brief are finished**:
 
-- Deaths use procedural pivot collapse with directional momentum, not joint-constrained physics ragdolls. Limbs are procedurally articulated, without a full IK solver.
+- Deaths use articulated procedural collapse with directional momentum and ground contact, not joint-constrained physics ragdolls. Arms and legs now use two-bone IK; this is not a full-body physics simulation.
 - Regional identity is background art and palette variation. There are no collidable barricades, destructible scenery, obstacle-navigation AI, building interiors, bosses or campaign.
 - Art and sound are original procedural work; they have not received a dedicated artist/audio production pass. Weapon shop thumbnails are simplified silhouettes.
 - No run saves, remappable controls, gamepad/mobile support or localization yet.
@@ -78,7 +91,7 @@ npm test
 npm run build
 ```
 
-The eight unit tests cover ray intersections, headshot scaling, weapon configuration, enemy state transitions and roster gating, waves, purchases, supplies and upgrade caps.
+The unit tests cover ray intersections, headshot scaling, weapon configuration, enemy state transitions, roster gating, waves, economy and upgrade caps, plus IK bone lengths, frame-rate consistency, planted feet, stopping, reload hand paths, aiming, per-type poses, head hit regions and settled deaths.
 
 Browser smoke test (with the dev server already running in another terminal):
 
@@ -100,7 +113,9 @@ The smoke test uses the real browser and keyboard/pointer input. A development-o
 - `src/game/scenes/Survival.ts` — Phaser lifecycle, input and combat orchestration.
 - `src/game/entities/model.ts` — run state, economy, enemy definitions and state transitions.
 - `src/game/combat/weapons.ts` — weapon balance and collision math.
-- `src/game/graphics/art.ts` — original articulated characters and cached landscapes.
+- `src/game/animation/` — IK, springs, locomotion and action poses.
+- `src/game/graphics/characters.ts` — articulated pixel characters and weapon attachments.
+- `src/game/graphics/art.ts` — cached landscapes.
 - `src/game/systems/particles.ts` — pooled combat effects.
 - `src/game/audio/sound.ts` — Web Audio synthesis.
 - `src/game/ui/interface.ts`, `src/style.css` — menus, shop, HUD and settings.

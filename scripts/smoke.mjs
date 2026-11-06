@@ -11,6 +11,7 @@ const browser = await chromium.launch({
   args: ["--no-sandbox", "--disable-dev-shm-usage"],
 });
 const page = await browser.newPage({ viewport: { width: 1440, height: 810 } });
+page.setDefaultTimeout(15000);
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 const read = (fn, arg) => page.evaluate(fn, arg);
@@ -109,7 +110,20 @@ try {
   const elapsed = await read(
     () => window.__deadfall.scene.getScene("Survival").run.elapsed,
   );
+  const frozenRig = await read(() =>
+    JSON.stringify(
+      window.__deadfall.scene.getScene("Survival").run.player.animation,
+    ),
+  );
   await page.waitForTimeout(250);
+  assert.equal(
+    await read(() =>
+      JSON.stringify(
+        window.__deadfall.scene.getScene("Survival").run.player.animation,
+      ),
+    ),
+    frozenRig,
+  );
   assert.equal(
     await read(() => window.__deadfall.scene.getScene("Survival").run.elapsed),
     elapsed,
@@ -210,6 +224,7 @@ try {
       s.run.cooldown = 0;
       s.run.player.reload = 0;
       s.run.player.dodge = 0;
+      s.run.player.melee = 0;
       s.run.ammo[i] = 10;
       s.run.enemies = [
         {
@@ -230,16 +245,16 @@ try {
         },
       ];
     }, i);
-    const coords = await read(() => {
+    const coords = await read(async () => {
+      const { enemyHitAreas } = await import("/src/game/animation/animator.ts");
       const s = window.__deadfall.scene.getScene("Survival");
-      const e = s.run.enemies[0];
-      const scale = [1, 0.91, 1.32, 0.7, 1.08, 1][s.run.weapon];
-      return {
-        x: (e.x - s.cameraX) * 1.5,
-        y: (e.y - (e.kind === "crawler" ? 20 : 65) * scale) * 1.5,
-      };
+      const body = enemyHitAreas(s.run.enemies[0]).body;
+      return { x: (body.x - s.cameraX) * 1.5, y: body.y * 1.5 };
     });
-    // Crawler's horizontal rig puts its hit volume slightly behind its root.
+    // Aim at the visible animated torso, including the crawler's low silhouette.
+    console.log(
+      `Checking weapon ${i + 1}/6 against ${await read(() => window.__deadfall.scene.getScene("Survival").run.enemies[0].kind)}`,
+    );
     await page.mouse.click(coords.x, coords.y);
     await page.waitForFunction(
       () =>
@@ -261,6 +276,17 @@ try {
     window.__deadfall.scene.getScene("Survival").run.player.hp = 0;
   });
   await page.waitForSelector(".death-modal");
+  await page.click('[data-action="menu"]');
+  await page.waitForSelector(".hero");
+  assert.equal(
+    await read(() =>
+      Boolean(
+        window.__deadfall.scene.getScene("Survival").previewPlayer.animation
+          ?.dead,
+      ),
+    ),
+    false,
+  );
   await page.click('[data-action="start"]');
   assert.equal(
     await read(() => window.__deadfall.scene.getScene("Survival").run.kills),

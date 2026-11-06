@@ -1,6 +1,6 @@
 {
   "name": "deadfall",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,7 +11,9 @@
     "test:browser": "node scripts/smoke.mjs",
     "format": "prettier --write src tests scripts README.md index.html package.json tsconfig.json",
     "format:check": "prettier --check src tests scripts README.md index.html package.json tsconfig.json",
-    "build:standalone": "npm run build && node scripts/package-game.mjs"
+    "build:standalone": "npm run build && node scripts/package-game.mjs",
+    "review:animation": "node scripts/review-animation.mjs",
+    "test:standalone": "node scripts/check-standalone.mjs"
   },
   "dependencies": {
     "phaser": "^3.90.0"

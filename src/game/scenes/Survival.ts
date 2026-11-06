@@ -1,3 +1,9 @@
+import {
+  updatePlayerAnimation,
+  updateEnemyAnimation,
+  playerMuzzle,
+  enemyHitAreas,
+} from "../animation/animator";
 import Phaser from "phaser";
 import {
   Run,
@@ -14,6 +20,7 @@ import { Particles } from "../systems/particles";
 import { Interface } from "../ui/interface";
 export class Survival extends Phaser.Scene {
   run = new Run();
+  previewPlayer = { ...new Run().player, x: 245 };
   soundFX = new Sound();
   particles = new Particles();
   land = new Landscape();
@@ -109,6 +116,7 @@ export class Survival extends Phaser.Scene {
     this.stains = [];
     this.tracers = [];
     this.particles = new Particles();
+    this.flash = this.hit = this.shake = this.meleeCooldown = this.footstep = 0;
     this.held = false;
     this.ui.render();
     this.soundFX.unlock();
@@ -220,14 +228,20 @@ export class Survival extends Phaser.Scene {
       this.reload();
       return;
     }
+    // Firing interrupts the visual melee follow-through; the gun returns to
+    // the aimed constraint before calculating its muzzle position.
+    p.melee = 0;
     r.ammo[r.weapon]--;
     r.cooldown = w.rate;
     p.recoil = w.recoil;
     this.flash = 0.055;
     this.shake = w.recoil * 0.25 * this.settings.intensity;
     this.soundFX.play("shot", r.weapon);
-    const ox = p.x + Math.cos(this.aim) * 32,
-      oy = p.y - 78 + Math.sin(this.aim) * 32;
+    // Keep the established chamber ray for close-range hits. Recoil and other
+    // visual offsets must not turn an accurately aimed shot into a miss.
+    const ox = p.x + Math.cos(this.aim) * 32;
+    const oy = p.y - 78 + Math.sin(this.aim) * 32;
+    const muzzle = playerMuzzle(p, this.aim, r.weapon);
     this.particles.emit(p.x, p.y - 80, 1, "#d6af5c", 80, 210);
     for (let i = 0; i < w.pellets; i++) {
       const angle = this.aim + (Math.random() - 0.5) * w.spread,
@@ -240,16 +254,23 @@ export class Survival extends Phaser.Scene {
         if (e.state === "die" || e.state === "spawn") continue;
         const scale = ENEMIES[e.kind].scale,
           crawl = e.kind === "crawler";
-        const hx = e.x - (crawl ? 43 : 3) * scale,
-          hy = e.y - (crawl ? 28 : 103) * scale;
-        const ht = rayCircle(ox, oy, dx, dy, hx, hy, 12 * scale);
+        const areas = enemyHitAreas(e);
+        const ht = rayCircle(
+          ox,
+          oy,
+          dx,
+          dy,
+          areas.head.x,
+          areas.head.y,
+          12 * scale,
+        );
         const bt = rayCircle(
           ox,
           oy,
           dx,
           dy,
-          e.x - (crawl ? 12 : 0),
-          e.y - (crawl ? 20 : 65) * scale,
+          areas.body.x,
+          areas.body.y,
           (crawl ? 23 : 21) * scale,
         );
         if (ht !== null && ht < nearest) {
@@ -265,7 +286,7 @@ export class Survival extends Phaser.Scene {
       }
       const tx = ox + dx * nearest,
         ty = oy + dy * nearest;
-      this.tracers.push({ x: ox, y: oy, tx, ty, life: 0.07 });
+      this.tracers.push({ x: muzzle.x, y: muzzle.y, tx, ty, life: 0.07 });
       if (target)
         this.damageEnemy(
           target,
@@ -431,7 +452,9 @@ export class Survival extends Phaser.Scene {
         }
         if (r.enemies.filter((e) => e.state === "die").length > 32) {
           const index = r.enemies.findIndex(
-            (e) => e.state === "die" && e.fall >= 1,
+            (e) =>
+              e.state === "die" &&
+              (e.animation ? e.animation.death >= 1 : e.fall >= 1),
           );
           if (index >= 0) r.enemies.splice(index, 1);
         }
@@ -466,6 +489,27 @@ export class Survival extends Phaser.Scene {
       this.hit = Math.max(0, this.hit - dt);
       this.shake = Math.max(0, this.shake - dt * 20);
     }
+    // Advance the skeleton exactly once per simulation step. Rendering is pure,
+    // so paused poses and settled corpses stay completely still.
+    if (active || r.phase === "over") {
+      updatePlayerAnimation(
+        p,
+        dt,
+        this.aim,
+        WEAPONS[r.weapon].reload * (1 - r.reloadLevel * 0.15),
+        r.phase === "over",
+      );
+      for (const e of r.enemies)
+        if (active || e.state === "die") updateEnemyAnimation(e, dt, p.x);
+    } else if (r.phase === "menu") {
+      updatePlayerAnimation(
+        this.previewPlayer,
+        dt,
+        -0.06,
+        WEAPONS[r.weapon].reload,
+      );
+      for (const e of this.demo) updateEnemyAnimation(e, dt, 245);
+    }
     this.pressed = false;
     this.draw();
     this.ui.update();
@@ -473,8 +517,8 @@ export class Survival extends Phaser.Scene {
   draw() {
     const c = this.ctx,
       r = this.run,
-      p = r.player,
-      demo = r.phase === "menu";
+      demo = r.phase === "menu",
+      p = demo ? this.previewPlayer : r.player;
     const camera = demo ? 0 : this.cameraX;
     c.clearRect(0, 0, W, H);
     c.save();
@@ -516,22 +560,11 @@ export class Survival extends Phaser.Scene {
           phase: demo ? this.artTime : p.phase,
           x: demo ? 245 : p.x,
         };
-        if (r.phase === "over") {
-          c.save();
-          c.translate(p.x, p.y);
-          c.rotate(-Math.PI / 2);
-          copy.x = 0;
-          copy.y = 0;
-          survivor(c, copy, 0, r.weapon, this.artTime);
-          c.restore();
-        } else
-          survivor(c, copy, demo ? -0.06 : this.aim, r.weapon, this.artTime);
+        survivor(c, copy, demo ? -0.06 : this.aim, r.weapon, this.artTime);
       }
     }
     if (this.flash > 0) {
-      const ox =
-          p.x + Math.cos(this.aim) * (WEAPONS[r.weapon].range > 900 ? 87 : 65),
-        oy = p.y - 78 + Math.sin(this.aim) * 60;
+      const { x: ox, y: oy } = playerMuzzle(p, this.aim, r.weapon);
       c.save();
       c.translate(ox, oy);
       c.rotate(this.aim);
